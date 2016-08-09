@@ -5,18 +5,21 @@
   "main": "dist\\server.js",
   "scripts": {
     "build": "gulp build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jasmine JASMINE_CONFIG_PATH=jasmine.json"
   },
   "dependencies": {
     "body-parser": "~1.0.1",
     "express": "~4.0.0",
     "mongoose": "~3.6.13",
+    "reflect-metadata": "^0.1.4",
+    "routing-controllers": "^0.6.3",
     "typescript": "^1.8.10"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "gulp": "^3.9.1",
-    "gulp-typescript": "^2.13.6"
+    "gulp-typescript": "^2.13.6",
+    "jasmine": "^2.4.1"
   }
 }
