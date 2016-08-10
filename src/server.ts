@@ -3,11 +3,10 @@ import * as bodyParser from 'body-parser';
 import "reflect-metadata";
 import { createExpressServer, useContainer, defaultMetadataArgsStorage } from "routing-controllers";
 
-import { Config, PostRepository, PostController } from './';
+import { Config } from './';
 import { Container } from './container';
 
-Container.set(PostRepository, new PostRepository());
-Container.set(PostController, new PostController(Container.get(PostRepository)));
+require('./container-config');
 useContainer(Container, { fallback: true, fallbackOnErrors: false});
 
 const app = createExpressServer({
