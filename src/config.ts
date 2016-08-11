@@ -1,10 +1,7 @@
-export interface IConfig {
-  ConnectionString: string;
-  Port: number;
-}
-
-export class Config implements IConfig {
+export class Config {
   private _connectionString: string;
+  private _databaseName: string;
+  private _databaseAuthKey: string;
   private _port: number;
 
   get ConnectionString(): string {
@@ -12,6 +9,20 @@ export class Config implements IConfig {
       this._connectionString = process.env.CONNECTION_STRING || '';
     
     return this._connectionString;
+  }
+
+  get DatabaseName(): string {
+    if (!this._databaseName)
+      this._databaseName = process.env.DB_NAME || 'TestDb';
+
+    return this._databaseName;
+  }
+
+  get DatabaseAuthKey(): string {
+    if (!this._databaseAuthKey)
+      this._databaseAuthKey = process.env.DB_AUTH_KEY || '';
+
+    return this._databaseAuthKey;
   }
 
   get Port(): number {

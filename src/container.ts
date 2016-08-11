@@ -1,6 +1,8 @@
 import { defaultMetadataArgsStorage } from "routing-controllers";
 import { MetadataArgsStorage } from "routing-controllers/metadata-builder/MetadataArgsStorage";
 
+import { debug } from './';
+
 class Container {
   static instances: { type: Function, object: any }[] = [
     {type: MetadataArgsStorage, object: defaultMetadataArgsStorage()}
@@ -8,12 +10,12 @@ class Container {
 
   static get(someClass: any): any {
     try {
-        console.log("Getting %s from container", someClass.name);
+        debug("Getting %s from container", someClass.name);
 
         let instance = Container.instances.find(instance => instance.type === someClass);
         
         if (!instance) {
-            console.log("Could not find instance for %s", someClass.name);
+            debug("Could not find instance for %s", someClass.name);
             instance = { type: someClass, object: new someClass()};
             if (!instance) {
               throw new Error("Unable to construct an instance of " + someClass.name);
@@ -21,7 +23,7 @@ class Container {
             Container.instances.push(instance);
         }
         else {
-          console.log("Found instance for %s", someClass.name);
+          debug("Found instance for %s", someClass.name);
         }
           
         return instance.object;

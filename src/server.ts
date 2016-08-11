@@ -3,7 +3,7 @@ import * as bodyParser from 'body-parser';
 import "reflect-metadata";
 import { createExpressServer, useContainer, defaultMetadataArgsStorage } from "routing-controllers";
 
-import { Config } from './';
+import { Config, debug } from './';
 import { Container } from './container';
 
 require('./container-config');
@@ -14,8 +14,7 @@ const app = createExpressServer({
   controllerDirs: [__dirname + "/post/*.controller.js"]
 });
 
-console.log("Directory:");
-console.log(__dirname);
+debug("Directory: %s", __dirname);
 
 const config = new Config();
 
