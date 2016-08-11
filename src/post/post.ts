@@ -8,5 +8,4 @@ export class Post {
     createdOn: Date;
     publishedOn: Date;
     updatedOn: Date;
-    visible: boolean;
 }

@@ -2,6 +2,7 @@ export class Config {
   private _connectionString: string;
   private _databaseName: string;
   private _databaseAuthKey: string;
+  private _collectionPerformanceLevel: string;
   private _port: number;
 
   get ConnectionString(): string {
@@ -23,6 +24,13 @@ export class Config {
       this._databaseAuthKey = process.env.DB_AUTH_KEY || '';
 
     return this._databaseAuthKey;
+  }
+
+  get CollectionPerformanceLevel(): string {
+    if (!this._collectionPerformanceLevel)
+      this._collectionPerformanceLevel = process.env.COLLECTION_PERF_LEVEL || 'S1';
+    
+    return this._collectionPerformanceLevel;
   }
 
   get Port(): number {
