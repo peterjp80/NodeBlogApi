@@ -6,8 +6,8 @@ export class Database {
 
     }
 
-    connect() {
-      mongoose.connect(this.config.ConnectionString);
+    connect(): Promise<any> {
+      return mongoose.connect(this.config.ConnectionString).Promise;
     }
 
     

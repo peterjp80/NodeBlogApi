@@ -14,7 +14,7 @@ export class Config {
 
   get DatabaseName(): string {
     if (!this._databaseName)
-      this._databaseName = process.env.DB_NAME || 'TestDb';
+      this._databaseName = process.env.DB_NAME || 'nbadbtest';
 
     return this._databaseName;
   }

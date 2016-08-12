@@ -7,10 +7,12 @@
     "mime": "registry:dt/mime#0.0.0+20160316155526",
     "mongoose": "registry:dt/mongoose#4.5.4+20160807120805",
     "node": "registry:dt/node#6.0.0+20160807145350",
+    "package": "file:package.d.ts",
     "serve-static": "registry:dt/serve-static#0.0.0+20160606155157"
   },
   "dependencies": {
     "debug": "registry:npm/debug#2.0.0+20160723033700",
-    "documentdb": "registry:npm/documentdb#1.8.0+20160622193850"
+    "documentdb": "registry:npm/documentdb#1.8.0+20160622193850",
+    "mongodb": "registry:npm/mongodb#2.1.0+20160721204323"
   }
 }
