@@ -9,6 +9,7 @@ describe('PostController: getAll', () => {
   beforeEach(() => {
     repository = new MockPostRepository();
     controller = new PostController(repository);
+    console.log("ENV  = %s", process.env.NODE_ENV)
   });
 
   it('calls the repository getAll() function', () => {

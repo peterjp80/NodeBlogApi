@@ -1,5 +1,9 @@
-import { Container } from './container';
-import { PostRepository, PostController } from './';
+import { DocumentClient } from 'documentdb'
 
-Container.set(PostRepository, new PostRepository());
-Container.set(PostController, new PostController(Container.get(PostRepository)));
+import { Container } from './container';
+import { Config, PostRepository, PostController } from './';
+
+Container.set(Config, new Config);
+// Container.set(DocumentClient, new DocumentClient()
+// Container.set(PostRepository, new PostRepository(DocumentClient, Container.get(Config)));
+// Container.set(PostController, new PostController(Container.get(PostRepository)));

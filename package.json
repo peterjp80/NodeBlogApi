@@ -4,10 +4,10 @@
   "description": "",
   "main": "dist/server.js",
   "scripts": {
-    "start": "DEBUG=blog-api node dist/server.js",
+    "start": "DEBUG=blog-api,express:* node dist/server.js",
     "prestart": "npm run build",
     "build": "gulp build",
-    "test": "gulp test",
+    "test": "NODE_ENV=test gulp test",
     "postinstall": "typings install",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
@@ -31,7 +31,6 @@
   "devDependencies": {
     "file-exists": "^2.0.0",
     "gulp": "^3.9.1",
-    "gulp-env": "^0.4.0",
     "gulp-jasmine": "^2.4.0",
     "gulp-typescript": "^2.13.6",
     "inversify-dts": "^1.6.0",
