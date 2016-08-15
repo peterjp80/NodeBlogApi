@@ -38,6 +38,7 @@
     "gulp-typescript": "^2.13.6",
     "inversify-dts": "^1.6.0",
     "jasmine": "^2.4.1",
-    "run-sequence": "^1.2.2"
+    "run-sequence": "^1.2.2",
+    "supertest": "^2.0.0"
   }
 }

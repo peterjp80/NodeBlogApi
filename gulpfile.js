@@ -41,7 +41,7 @@ gulp.task('integrationTests', function() {
       config: {
           "spec_dir": "build/test",
           "spec_files": [
-            "**/*.[iI]ntegration.js"
+            "**/*.[fF]unctional.js"
           ],
           "stopSpecOnExpectationFailure": false,
           "random": false

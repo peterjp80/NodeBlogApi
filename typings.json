@@ -8,7 +8,9 @@
     "mongoose": "registry:dt/mongoose#4.5.4+20160807120805",
     "node": "registry:dt/node#6.0.0+20160807145350",
     "package": "file:package.d.ts",
-    "serve-static": "registry:dt/serve-static#0.0.0+20160606155157"
+    "serve-static": "registry:dt/serve-static#0.0.0+20160606155157",
+    "superagent": "registry:dt/superagent#2.0.0+20160811085415",
+    "supertest": "registry:dt/supertest#1.1.0+20160724070541"
   },
   "dependencies": {
     "debug": "registry:npm/debug#2.0.0+20160723033700",
