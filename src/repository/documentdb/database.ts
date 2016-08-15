@@ -3,7 +3,9 @@ import { DocumentClient, SqlQuerySpec } from 'documentdb';
 
 export class Database {
     constructor(private config: Config) {
-
+        if (!Config.isTestEnvironment()) {
+            config = new Config();
+        }
     }
 
     private static collections = ['Posts'];
@@ -11,10 +13,10 @@ export class Database {
 
     connect(): Promise<any> {
         let self = this;
-        var databaseUrl = 'dbs/' + this.config.DatabaseName;
+        var databaseUrl = 'dbs/' + this.config.databaseName;
 
-        debug("Database=%s", this.config.DatabaseName);
-        var c = new DocumentClient(this.config.ConnectionString, {masterKey: this.config.DatabaseAuthKey});
+        debug("Database=%s", this.config.databaseName);
+        var c = new DocumentClient(this.config.connectionString, {masterKey: this.config.databaseAuthKey});
         return self.initializeDatabase(c)
             .then((result) => { 
                 return self.initializeCollections(0, databaseUrl, c)
@@ -33,7 +35,7 @@ export class Database {
             query: 'SELECT * FROM root r WHERE r.id = @id',
             parameters: [{
                 name: '@id',
-                value: this.config.DatabaseName
+                value: this.config.databaseName
             }]
         };
 
@@ -48,13 +50,13 @@ export class Database {
                     } else {
                         if (results.length === 0) {
                             debug("Creating Database");
-                            client.createDatabase({id: this.config.DatabaseName}, (err, created) => {
+                            client.createDatabase({id: this.config.databaseName}, (err, created) => {
                                 if (err) {
                                     debug("Error creating database")
                                     debug(err);
                                     reject(err);
                                 } else {
-                                    debug("Database (%s) Created", this.config.DatabaseName)
+                                    debug("Database (%s) Created", this.config.databaseName)
                                     resolve();
                                 } 
                             })
@@ -91,7 +93,7 @@ export class Database {
                 } else {
                     if (results.length === 0) {
                         var requestOptions = {
-                            offerType: this.config.CollectionPerformanceLevel
+                            offerType: this.config.collectionPerformanceLevel
                         }
 
                         debug("Creating Collection (%s)", collectionId);

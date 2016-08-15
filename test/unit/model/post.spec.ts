@@ -1,4 +1,4 @@
-import { Post } from './post';
+import { Post } from '../../../src/models/post';
 
 describe("Post: create()", () => {
   it("copies id", () => {

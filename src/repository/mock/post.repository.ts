@@ -1,11 +1,11 @@
 import "reflect-metadata";
 
-import { Post } from './post';
+import { Post, IPostRepository, debug } from '../../';
 import { posts } from './mock-posts';
-import { IPostRepository } from './post.repository';
 
-class MockPostRepository implements IPostRepository {
+class PostRepository implements IPostRepository {
   getAll(): Promise<Post[]> {
+    debug("Mock PostRepository getAll()")
     return Promise.resolve(posts);
   }
 
@@ -26,4 +26,4 @@ class MockPostRepository implements IPostRepository {
   }
 }
 
-export { MockPostRepository };
+export { PostRepository };

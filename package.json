@@ -7,7 +7,7 @@
     "start": "DEBUG=blog-api,express:* node dist/server.js",
     "prestart": "npm run build",
     "build": "gulp build",
-    "test": "NODE_ENV=test gulp test",
+    "test": "NODE_ENV=test DEBUG=blog-api gulp test",
     "postinstall": "typings install",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
@@ -29,6 +29,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "del": "^2.2.2",
     "file-exists": "^2.0.0",
     "gulp": "^3.9.1",
     "gulp-jasmine": "^2.4.0",

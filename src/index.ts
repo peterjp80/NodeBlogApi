@@ -1,8 +1,8 @@
 export * from './config';
-export * from './helpers';
-export * from './post/post.repository';
-export * from './post/post.controller';
-export * from './post/post';
+export * from './controllers/base.controller';
+export * from './controllers/post.controller';
+export * from './models/post';
 export * from './debug';
-export * from './data/azure';
-export { PostRepository as PostRepository } from './post/documentdb-post.repository';
+export * from './repository/ipost.repository';
+export * from './repository/documentdb/database';
+export * from './repository/documentdb/post.repository';

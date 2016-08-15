@@ -4,33 +4,33 @@ import "reflect-metadata";
 import { createExpressServer, useContainer, defaultMetadataArgsStorage } from "routing-controllers";
 
 import { Config, Database, debug } from './';
-import { Container } from './container';
 
-require('dotenv').config();
+if (process.env.ENV_PATH) require('dotenv').config({path: process.env.ENV_PATH});
+else require('dotenv').config();
 
-console.log("DB_NAME=%s", process.env.DB_NAME);
+debug("DB_NAME=%s", process.env.DB_NAME);
 
 const config = new Config();
 
 let databaseReady = false;
 let database = new Database(config);
+
+// Ensure that the we're "connected" and that the database and collections exist before listening for requests
 database.connect().then(() => { 
   databaseReady = true;
-  //require('./container-config');
-  //useContainer(Container, { fallback: true, fallbackOnErrors: false});
 
   debug("Creating express server");
 
   const app = createExpressServer({
     routePrefix: "/api",
-    controllerDirs: [__dirname + "/post/*.controller.js"]
+    controllerDirs: [__dirname + "/controllers/*.controller.js"]
   });
 
   debug("Directory: %s", __dirname);
 
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
-  const port: number = config.Port;
+  const port: number = config.port;
 
   app.listen(port);
   debug("Listening on port %i", port);

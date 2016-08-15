@@ -1,14 +1,15 @@
-import { Config, Database, Helpers, IPostRepository, Post, debug } from '../';
+import { Config, Database, IPostRepository, Post, debug } from '../../';
+
 import { DocumentClient, RetrievedDocument, SqlQuerySpec } from 'documentdb'
 
 export class PostRepository implements IPostRepository {
   constructor(private client?: DocumentClient, private config?: Config) {
-    if (!Helpers.isTestEnvironment()) {
+    if (!Config.isTestEnvironment()) {
       if (!client) this.client = Database.client;
       if (!config) this.config = new Config();
     }    
     debug(this.config);
-    this.collectionUrl = 'dbs/' + this.config.DatabaseName + '/colls/Posts';
+    this.collectionUrl = 'dbs/' + this.config.databaseName + '/colls/Posts';
   }
 
   private collectionUrl: string;
