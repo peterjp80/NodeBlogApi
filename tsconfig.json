@@ -8,13 +8,11 @@
     "experimentalDecorators": true,
     "removeComments": false,
     "noImplicitAny": true,
-    "suppressImplicitAnyIndexErrors": true,
-	  "outDir": "dist"
+    "suppressImplicitAnyIndexErrors": true
   },
   "exclude": [
     "node_modules",
-    "dist",
-    "test",
+    "build",
     "package.d.ts"
   ]
 }

@@ -1,46 +1,45 @@
 var path = require('path');
 var gulp = require('gulp');
 var ts = require('gulp-typescript');
+var filter = require('gulp-filter');
+var rename = require('gulp-rename');
 var jasmine = require('gulp-jasmine');
 var runSequence = require('run-sequence');
 var del = require('del');
 
 gulp.task('clean', function() {
-  return del(['dist/**/*', 'test/**/*.js']);
+  return del(['build/**/*']);
 })
 
-gulp.task('compile-src', function() {  
+gulp.task('compile', function() {  
   var tsProject = ts.createProject(path.resolve('./tsconfig.json'));
-  var tsResult = tsProject.src('src/**/*.ts').pipe(ts(tsProject));
-  return tsResult.js.pipe(gulp.dest('dist'));
-})
+  var tsResult = tsProject.src(['src/**/*.ts', 'test/**/*.ts']).pipe(ts(tsProject));
 
-gulp.task('compile-test', function() {  
-  var tsProject = ts.createProject(path.resolve('./tsconfig.json'));
-  var tsResult = tsProject.src('test/**/*.ts').pipe(ts(tsProject));
-  return tsResult.js.pipe(gulp.dest('test'));
+  // var srcFilter = filter('src/**/*.js', {restore: true});
+  // var testFilter = filter('test/**/*.js', {restore: true});
+  return tsResult.js
+    .pipe(gulp.dest('build'));
 })
 
 gulp.task('unitTests', function() {  
   gulp.src('')
     .pipe(jasmine({
       config: {
-          "spec_dir": "dist",
+          "spec_dir": "build/test",
           "spec_files": [
             "**/*.[sS]pec.js"
           ],
           "stopSpecOnExpectationFailure": false,
           "random": false
         }
-    }));
-    
+    }));    
 })
 
 gulp.task('integrationTests', function() {  
   gulp.src('')
     .pipe(jasmine({
       config: {
-          "spec_dir": "dist",
+          "spec_dir": "build/test",
           "spec_files": [
             "**/*.[iI]ntegration.js"
           ],
@@ -51,9 +50,9 @@ gulp.task('integrationTests', function() {
 })
 
 gulp.task('build', function() {
-  runSequence('clean', 'compile-src');
+  runSequence('clean', 'compile');
 })
 
 gulp.task('test', function() {
-  runSequence('clean', 'compile-src', 'compile-test', 'unitTests', 'integrationTests');
+  runSequence('clean', 'compile', 'unitTests', 'integrationTests');
 })
