@@ -17,12 +17,12 @@ class PostRepository implements IPostRepository {
     return Promise.resolve(post);
   }
 
-  update(post: Post): void {
-    return;
+  update(post: Post): Promise<any> {
+    return Promise.resolve();
   }
 
-  delete(id: string): void {
-    return;
+  delete(id: string): Promise<any> {
+    return Promise.resolve();
   }
 }
 

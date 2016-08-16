@@ -22,6 +22,7 @@ class PostController extends BaseController {
     }
 
     @Get("/post/:id")
+    @EmptyResultCode(404)
     async get(@Param("id") id: string, @Res() response: Response) {
         debug("GET /post/%s", id);
         return await super.executeAction(response, () => { return this.postRepository.get(id); });
@@ -31,7 +32,19 @@ class PostController extends BaseController {
     @Post("/post")
     async create(@Body() post: BlogPost, @Res() response: Response, @Req() request: Request) {
         debug ("POST /post")
-        var createdPost = await super.executeAction(response, () => { return this.postRepository.create(post); });
+        var createdPost = await super.executeAction(response, () => { 
+            return this.postRepository.create(post)
+                .catch((err) => {
+                    debug("Error in Create Post");
+                    console.log(err);
+                    if (err && err.code === 409) {
+                        super.sendError(response, 409, "A post with this id already exists.");
+                        return null;
+                    } else {
+                        throw err;
+                    }                    
+                });
+        });
 
         if (response && createdPost && createdPost.id && !response.headersSent)
             response.setHeader("Location", super.buildLocationUrl(request, 'post', createdPost.id));

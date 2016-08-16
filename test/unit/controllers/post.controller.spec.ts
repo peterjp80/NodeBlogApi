@@ -104,7 +104,7 @@ describe('PostController', () => {
       title: "test title"
     };
 
-    spyOn(repository, "create").and.returnValue(post);
+    spyOn(repository, "create").and.returnValue(new Promise((resolve, reject) => resolve(post)));
 
     controller.create(post, <Response><any>res, <Request>req).then(() => {
       expect(res.headers).toBeTruthy();
@@ -120,7 +120,7 @@ describe('PostController', () => {
       title: "test title"
     };
 
-    spyOn(repository, "create").and.returnValue(post);
+    spyOn(repository, "create").and.returnValue(new Promise((resolve, reject) => resolve(post)));
 
     controller.create(post, <Response><any>res, <Request>req).then((result) => {
       expect(result).toBeTruthy();

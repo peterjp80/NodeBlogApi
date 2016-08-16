@@ -11,9 +11,13 @@ export class Database {
     private static collections = ['Posts'];
     public static client: DocumentClient;
 
+    static buildDatabaseUrl(dbName: string): string {
+        return 'dbs/' + dbName;
+    }
+
     connect(): Promise<any> {
         let self = this;
-        var databaseUrl = 'dbs/' + this.config.databaseName;
+        var databaseUrl = Database.buildDatabaseUrl(this.config.databaseName);
 
         debug("Database=%s", this.config.databaseName);
         var c = new DocumentClient(this.config.connectionString, {masterKey: this.config.databaseAuthKey});

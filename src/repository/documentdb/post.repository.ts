@@ -95,8 +95,7 @@ export class PostRepository implements IPostRepository {
       if (err) reject(err);
       resolve();
       
-    });
-    
+    });    
       
     });
   }
