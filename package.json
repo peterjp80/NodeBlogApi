@@ -21,6 +21,7 @@
     "express": "^4.14.0",
     "mongodb": "^2.2.5",
     "mongoose": "~3.6.13",
+    "password-hash": "^1.2.2",
     "reflect-metadata": "^0.1.4",
     "routing-controllers": "^0.6.3",
     "typedi": "^0.4.2",
